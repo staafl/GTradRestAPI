@@ -23,7 +23,9 @@ namespace GTradRestAPI
         /// <summary>
         /// Google trad api uri (path and query)
         /// </summary>
-        public string GTradRestAPIURL { get; set; } = "https://translate.googleapis.com/translate_a/single?client=gtx&sl={srcl}&tl={tgtl}&dt=t&q={txt}";
+        public string GTradRestAPIURL { get; set; } =
+            "https://translate.google.com/translate_a/single?client=webapp&sl={srcl}&tl={tgtl}&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=sos&dt=ss&dt=t&dt=gt&otf=1&ssel=0&tsel=0&kc=7&tk=610980.1044405&q={txt}";
+            // "https://translate.googleapis.com/translate_a/single?client=gtx&sl={srcl}&tl={tgtl}&dt=t&q={txt}";
 
         /// <summary>
         /// query time out

@@ -218,11 +218,22 @@ namespace GTradRestAPI
             if (!string.IsNullOrWhiteSpace(r.Item1))
             {
                 var o = JsonConvert.DeserializeObject(r.Item1) as JArray;
+                //Console.WriteLine(r.Item1);
                 if (o!=null)
                 {
                     try
                     {
-                        var translatedText = o[0][0][0].Value<string>();
+                        string suffix = sourceLanguage == Languages.auto ? "(from " + o[2] + ")\n" : "";
+                        var translatedText = o[0][0][0].Value<string>(); 
+                        if (o[1] is JArray && (o[1] as JArray).Count > 0)
+                        {
+                            translatedText += "\n\n" + suffix;
+                            translatedText += string.Join("\n", o[1][0][2].Select(x => (x as JArray)?[0] + ": " + string.Join(", ", (x as JArray)?[1] as JArray) + "  \t" + (Convert.ToDouble((x as JArray)?.ElementAtOrDefault(3) ?? 0)).ToString("F2")));
+                        }
+                        else if (!string.IsNullOrWhiteSpace(suffix))
+                        {
+                            translatedText += "\n\n" + suffix;
+                        }
                         var originalText = o[0][0][1].Value<string>();
                         return new Translation()
                         {

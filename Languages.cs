@@ -8,6 +8,7 @@ namespace GTradRestAPI
 {
     public enum Languages
     {
+        auto,
         af,
         sq,
         ar,
